@@ -19,6 +19,7 @@ local diceSelectedForRollMap = {
 local menuDiceSpritesMap = nil
 local selectorIndicatorSprite = nil
 local resultsTextSprite = nil
+local bigFont = nil
 
 function initializeUx(initialDiceSpritesMap)
   menuDiceSpritesMap = initialDiceSpritesMap
@@ -35,6 +36,8 @@ function initializeUx(initialDiceSpritesMap)
   selectedDiceImage:setInverted(true)
   selectorIndicatorSprite:moveTo(selectedDice.siX, selectedDice.siY)
   selectorIndicatorSprite:add()
+
+  bigFont = gfx.font.new(FONT_18_FILE)
 end
 
 function changeSelectedDice(movePositionBy)
@@ -166,12 +169,12 @@ function displayDiceRoll(total, resultsMap)
   end
 
   local textSprite, textWasTruncated = gfx.sprite.spriteWithText(displayText, DISPLAY_WINDOW_SIZE.width,
-    DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left)
+    DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left, bigFont)
 
   if textWasTruncated then
     textSprite:remove()
     textSprite, textWasTruncated = gfx.sprite.spriteWithText(shortText, DISPLAY_WINDOW_SIZE.width,
-      DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left)
+      DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left, bigFont)
   end
 
   textSprite:setImageDrawMode(gfx.kDrawModeFillWhite)
