@@ -10,7 +10,10 @@ local gfx <const> = pd.graphics
 local menuDiceSpritesMap = nil
 
 function initializeGameAssets()
-    local backgroundImage = gfx.image.new("Images/GameWindow")
+    local font = gfx.font.new(FONT_FILE)
+    gfx.setFontFamily(font)
+
+    local backgroundImage = gfx.image.new(GAME_WINDOW_FILE)
     gfx.sprite.setBackgroundDrawingCallback(function(x, y, width, height) backgroundImage:draw(0, 0) end)
 
     menuDiceSpritesMap = addMenuDiceSprites()
