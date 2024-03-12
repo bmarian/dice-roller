@@ -1,4 +1,4 @@
-FONT_FILE = "system/fonts/8bit16"
+FONT_FILE = "fonts/8bit16"
 GAME_WINDOW_FILE = "Images/GameWindow"
 DISPLAY_WINDOW_SIZE = { x = 11, y = 12, width = 377, height = 160 }
 DICE_FILES = {
