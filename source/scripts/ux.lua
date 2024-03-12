@@ -15,20 +15,39 @@ function initializeUx(initialDiceSpritesMap)
   selectorIndicatorSprite = gfx.sprite.new(selectorIndicatorImage)
   selectorIndicatorSprite:setCenter(0, 0)
 
-  local selectedDice = DICE_MENU_POSITION[diceOrder[selectedDiceIndex]]
+  local selectedDiceName = diceOrder[selectedDiceIndex]
+  local selectedDice = DICE_MENU_POSITION[selectedDiceName]
+  local selectedDiceSprite = menuDiceSpritesMap[selectedDiceName]
+  local selectedDiceImage = selectedDiceSprite:getImage()
+
+  selectedDiceImage:setInverted(true)
   selectorIndicatorSprite:moveTo(selectedDice.siX, selectedDice.siY)
   selectorIndicatorSprite:add()
 end
 
 function changeSelectedDice(movePositionBy)
-  if not selectorIndicatorSprite or type(movePositionBy) ~= "number" then return nil end
+  if not selectorIndicatorSprite or not menuDiceSpritesMap or type(movePositionBy) ~= "number" then return nil end
 
+  local previousSelectedDiceIndex = selectedDiceIndex
   selectedDiceIndex += movePositionBy
+
   if selectedDiceIndex < firtDie then selectedDiceIndex = lastDie end
   if selectedDiceIndex > lastDie then selectedDiceIndex = firtDie end
 
-  local selectedDice = DICE_MENU_POSITION[diceOrder[selectedDiceIndex]]
-  selectorIndicatorSprite:moveTo(selectedDice.siX, selectedDice.siY)
+  local previousSelectedDiceName = diceOrder[previousSelectedDiceIndex]
+  local selectedDiceName = diceOrder[selectedDiceIndex]
+
+  local previousSelectedDicePosition = DICE_MENU_POSITION[previousSelectedDiceName]
+  local previousSelectedDiceSprite = menuDiceSpritesMap[previousSelectedDiceName]
+  local previousselectedDiceImage = previousSelectedDiceSprite:getImage()
+
+  local selectedDicePosition = DICE_MENU_POSITION[selectedDiceName]
+  local selectedDiceSprite = menuDiceSpritesMap[selectedDiceName]
+  local selectedDiceImage = selectedDiceSprite:getImage()
+
+  previousselectedDiceImage:setInverted(false)
+  selectedDiceImage:setInverted(true)
+  selectorIndicatorSprite:moveTo(selectedDicePosition.siX, selectedDicePosition.siY)
 end
 
 function updateUx()

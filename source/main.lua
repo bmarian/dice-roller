@@ -10,8 +10,6 @@ local gfx <const> = pd.graphics
 local menuDiceSpritesMap = nil
 
 function initializeGameAssets()
-    loadDiceImageMap()
-
     local backgroundImage = gfx.image.new("Images/GameWindow")
     gfx.sprite.setBackgroundDrawingCallback(function(x, y, width, height) backgroundImage:draw(0, 0) end)
 
