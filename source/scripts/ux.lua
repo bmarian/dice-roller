@@ -180,6 +180,9 @@ function displayDiceRoll(total, resultsMap)
   textSprite:add()
 
   resultsTextSprite = textSprite
+
+  gfx.sprite.redrawBackground()
+  gfx.sprite.update()
 end
 
 function rollDice()
@@ -228,6 +231,4 @@ function updateUx()
   if playdate.buttonJustReleased(playdate.kButtonB) then
     resetDice()
   end
-
-  coroutine.yield()
 end
