@@ -174,10 +174,6 @@ function displayDiceRoll(total, resultsMap)
       DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left)
   end
 
-  print(textWasTruncated)
-  print(displayText)
-  print(shortText)
-
   textSprite:setImageDrawMode(gfx.kDrawModeFillWhite)
   textSprite:setCenter(0, 0)
   textSprite:moveTo(DISPLAY_WINDOW_SIZE.x, DISPLAY_WINDOW_SIZE.y)
@@ -232,4 +228,6 @@ function updateUx()
   if playdate.buttonJustReleased(playdate.kButtonB) then
     resetDice()
   end
+
+  coroutine.yield()
 end
