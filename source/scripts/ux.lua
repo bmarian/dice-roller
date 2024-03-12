@@ -134,8 +134,83 @@ function resetDice()
   end
 end
 
-function rollDice()
+function displayDiceRoll(total, resultsMap)
+  local displayTextArray = {}
+  local shortTextArray = {}
 
+  for i = firtDie, lastDie do
+    local dieKey = diceOrder[i]
+    local die = resultsMap[dieKey]
+    local sum = die.sum
+    local res = die.res
+
+    if type(sum) == "number" and sum ~= 0 then
+      local resDisplay = ""
+      if #res > 1 then
+        resDisplay = "[" .. table.concat(res, ", ") .. "](" .. tostring(sum) .. ")"
+      else
+        resDisplay = "(" .. tostring(sum) .. ")"
+      end
+
+      table.insert(displayTextArray, dieKey .. resDisplay)
+      table.insert(shortTextArray, dieKey .. "(" .. tostring(sum) .. ")")
+    end
+  end
+
+  local displayText = table.concat(displayTextArray, " + ") .. " = " .. tostring(total)
+  local shortText = table.concat(shortTextArray, " + ") .. " = " .. tostring(total)
+
+  if resultsTextSprite then
+    resultsTextSprite:remove()
+    resultsTextSprite = nil
+  end
+
+  local textSprite, textWasTruncated = gfx.sprite.spriteWithText(displayText, DISPLAY_WINDOW_SIZE.width,
+    DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left)
+
+  if textWasTruncated then
+    textSprite:remove()
+    textSprite, textWasTruncated = gfx.sprite.spriteWithText(shortText, DISPLAY_WINDOW_SIZE.width,
+      DISPLAY_WINDOW_SIZE.height, nil, nil, "...", kTextAlignment.left)
+  end
+
+  print(textWasTruncated)
+  print(displayText)
+  print(shortText)
+
+  textSprite:setImageDrawMode(gfx.kDrawModeFillWhite)
+  textSprite:setCenter(0, 0)
+  textSprite:moveTo(DISPLAY_WINDOW_SIZE.x, DISPLAY_WINDOW_SIZE.y)
+  textSprite:add()
+
+  resultsTextSprite = textSprite
+end
+
+function rollDice()
+  local sum = 0
+  local resultsMap = { d4 = {}, d6 = {}, d8 = {}, d10 = {}, d12 = {}, d20 = {}, d100 = {}, }
+
+  for i = firtDie, lastDie do
+    local dieType = diceOrder[i]
+    local dieAmmount = diceSelectedForRollMap[dieType].ammount
+    if dieAmmount ~= 0 then
+      local localResults = {}
+      local localSum = 0
+
+      for j = 1, dieAmmount do
+        local result = math.random(1, DICE_FLOOR[dieType])
+        table.insert(localResults, result)
+        localSum += result
+      end
+
+      resultsMap[dieType] = { res = localResults, sum = localSum }
+      sum += localSum
+    end
+  end
+
+  if sum == 0 then return nil end
+
+  displayDiceRoll(sum, resultsMap)
 end
 
 function updateUx()

@@ -1,5 +1,6 @@
-FONT_FILE = "system/fonts/Big Run"
+FONT_FILE = "system/fonts/8bit16"
 GAME_WINDOW_FILE = "Images/GameWindow"
+DISPLAY_WINDOW_SIZE = { x = 11, y = 12, width = 377, height = 160 }
 DICE_FILES = {
   d4 = "Images/d4",
   d6 = "Images/d6",
@@ -23,4 +24,14 @@ DICE_MENU_POSITION = {
 }
 
 FLAG_INNER_SIZE = { width = 18, height = 18 }
-FLAG_TEXT_OFFSET = { x = 16, y = 12 }
+FLAG_TEXT_OFFSET = { x = 16, y = 14 }
+
+DICE_FLOOR = {
+  d4 = 4,
+  d6 = 6,
+  d8 = 8,
+  d10 = 10,
+  d12 = 12,
+  d20 = 20,
+  d100 = 100
+}
