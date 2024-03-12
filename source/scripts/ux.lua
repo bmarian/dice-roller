@@ -18,6 +18,7 @@ local diceSelectedForRollMap = {
 
 local menuDiceSpritesMap = nil
 local selectorIndicatorSprite = nil
+local resultsTextSprite = nil
 
 function initializeUx(initialDiceSpritesMap)
   menuDiceSpritesMap = initialDiceSpritesMap
@@ -117,6 +118,26 @@ function changeDiceSelectedForRoll(modifier)
   end
 end
 
+function resetDice()
+  for i = firtDie, lastDie do
+    diceSelectedForRollMap[diceOrder[i]].ammount = 0
+
+    if diceSelectedForRollMap[diceOrder[i]].flagSprite then
+      diceSelectedForRollMap[diceOrder[i]].flagSprite:remove()
+      diceSelectedForRollMap[diceOrder[i]].flagSprite = nil
+    end
+
+    if diceSelectedForRollMap[diceOrder[i]].textSprite then
+      diceSelectedForRollMap[diceOrder[i]].textSprite:remove()
+      diceSelectedForRollMap[diceOrder[i]].textSprite = nil
+    end
+  end
+end
+
+function rollDice()
+
+end
+
 function updateUx()
   if playdate.buttonJustReleased(playdate.kButtonUp) then
     changeDiceSelectedForRoll(1)
@@ -129,5 +150,11 @@ function updateUx()
   end
   if playdate.buttonJustReleased(playdate.kButtonLeft) then
     changeSelectedDice(-1)
+  end
+  if playdate.buttonJustReleased(playdate.kButtonA) then
+    rollDice()
+  end
+  if playdate.buttonJustReleased(playdate.kButtonB) then
+    resetDice()
   end
 end
