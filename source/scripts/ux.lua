@@ -89,7 +89,7 @@ function changeDiceSelectedForRoll(modifier)
     local textSprite = gfx.sprite.spriteWithText(tostring(newAmmount), FLAG_INNER_SIZE.width, FLAG_INNER_SIZE.height)
     textSprite:setImageDrawMode(gfx.kDrawModeFillBlack)
 
-    textSprite:moveTo(selectedDice.fX + 11, selectedDice.fY + 10)
+    textSprite:moveTo(selectedDice.fX + FLAG_TEXT_OFFSET.x, selectedDice.fY + FLAG_TEXT_OFFSET.y)
     textSprite:add()
 
     diceSelectedForRollMap[selectedDiceName]["textSprite"] = textSprite
@@ -108,7 +108,7 @@ function changeDiceSelectedForRoll(modifier)
     local textSprite = gfx.sprite.spriteWithText(tostring(newAmmount), FLAG_INNER_SIZE.width, FLAG_INNER_SIZE.height)
     textSprite:setImageDrawMode(gfx.kDrawModeFillBlack)
 
-    textSprite:moveTo(selectedDice.fX + 11, selectedDice.fY + 10)
+    textSprite:moveTo(selectedDice.fX + FLAG_TEXT_OFFSET.x, selectedDice.fY + FLAG_TEXT_OFFSET.y)
     textSprite:add()
 
     diceSelectedForRollMap[selectedDiceName]["textSprite"] = textSprite
